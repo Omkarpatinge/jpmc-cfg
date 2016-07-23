@@ -30,20 +30,23 @@
       font-weight: 400;
       margin-bottom: 30px;
   }
+  a
+  {
+    text-decoration: none;
+    color:grey; 
+  }
+
+  a:hover
+  {
+    text-decoration: none;
+    color: #f4511e;
+  }
   .jumbotron {
       background-color: #f4511e;
       color: #fff;
       padding: 100px 25px;
       font-family: Montserrat, sans-serif;
   }
-  a
-  {
-	text-decoration:none;
-	color:grey;
-  }
-  a:hover {
-    color: #f4511e;
-}
   .container-fluid {
       padding: 60px 50px;
   }
@@ -111,6 +114,16 @@
       border-bottom-left-radius: 0px;
       border-bottom-right-radius: 0px;
   }
+  #meeting_list
+  {
+      border: 1px solid #f4511e;
+      margin: 1%;
+      border-radius:0 !important;
+      transition: box-shadow 0.5s;
+  }
+  #meeting_list:hover {
+      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
+  }
   .panel-footer {
       background-color: white !important;
   }
@@ -161,16 +174,6 @@
       -webkit-animation-duration: 1s;
       visibility: visible;
   }
-  .new
-  {
-		border: 1px solid #f4511e;
-		
-  }
-  
-   .new:hover {
-      box-shadow: 5px 0px 40px rgba(0,0,0, .2);
-  }
-  
   @keyframes slide {
     0% {
       opacity: 0;
@@ -206,40 +209,13 @@
         font-size: 150px;
     }
   }
+
+  #inner_div{
+      margin: 2%;
+  }
+
   </style>
 
-<!-- script for maps -->
-<script
-src="http://maps.googleapis.com/maps/api/js">
-</script>
-
-<script>
-var myCenter=new google.maps.LatLng(51.508742,-0.120850);
-var marker;
-
-function initialize()
-{
-var mapProp = {
-  center:myCenter,
-  zoom:16,
-  mapTypeId:google.maps.MapTypeId.ROADMAP
-  };
-
-var map=new google.maps.Map(document.getElementById("googleMap"),mapProp);
-
-var marker=new google.maps.Marker({
-  position:myCenter,
-  animation:google.maps.Animation.BOUNCE
-  });
-
-marker.setMap(map);
-}
-
-google.maps.event.addDomListener(window, 'load', initialize);
-</script>
-<!-- script for maps -->
-
-  
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -254,104 +230,52 @@ google.maps.event.addDomListener(window, 'load', initialize);
       <a class="navbar-brand" href="#myPage">Logo</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-      <ul class="nav navbar-nav navbar-right">
+        <!-- <ul class="nav navbar-nav">
         <li><a href="#about">LOCATION</a></li>
         <li><a href="#services">DETAILS</a></li>
         <li><a href="#portfolio">FEEDBACK</a></li>
         <li><a href="#pricing">GOALS</a></li>
-      </ul>
+      </ul> -->
     </div>
   </div>
 </nav>
 
 
 
-<!-- Container (About Section) -->
-<div id="about" class="container-fluid">
-  <div class="row">
-    <div class="col-sm-8">
-      <h2>Location</h2><br>
-      <h4>LOCATION ADDRESS </h4><br>
-	  <p>date and time<p></div>
-      <div id="googleMap" class="col-sm-12" style="width:100%;height:500px;"></div>
-      <br>
-    </div>
-    <div class="col-sm-4">
-     
-    </div>
-  </div>
-</div>
 
-  <div id="services" class="container-fluid bg-grey text-center">
-  <div >
-    <h2>DETAILS</h2>
-  </div>
-  <div class="row">
-  <div class="col-sm-6">
-  MENTOR
-  <br>
-  MENTOR NAME
-  <br>
-  <div class="new">
-		<a href="#">
-		"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-		</a>
-  </div>
-  </div>
-  <div class="col-sm-6">
-  MENTEE
-  <br>
-  MENTEE NAME
-  <br>
-  <div class="new">
-	<a href="#">"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco
-	</a>
-  </div>
 
-  </div>
+
+
+
   
-</div>
   
-</div>
-
-
-<!-- Container (Services Section) -->
-<!--<div id="services" class="container-fluid text-center bg-grey">
-  <h2>DETAILS </h2>
-  
-  <br>
-  <div class="row slideanim">
-    <div class="col-sm-4">
-      
-      <h4>GREEN</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    <div class="col-sm-4">
-      <span class="glyphicon glyphicon-certificate logo-small"></span>
-      <h4>CERTIFIED</h4>
-      <p>Lorem ipsum dolor sit amet..</p>
-    </div>
-    </div>
-  </div>
-</div>
-
-<!-- Container (Portfolio Section) -->
-<div id="portfolio" class="container-fluid text-center">
-  <h2>FEEDBACK</h2><br>
-  <h4>What they have to say</h4>
-<br>
-  
- </div>
-  
-  --!>
-
 
   
 <!-- Container (Pricing Section) -->
 <div id="pricing" class="container-fluid bg-grey">
   <div class="text-center">
-    <h2>GOALS</h2>
-    <h4>Achievements from the interaction</h4>
+    <h2>MENTEES</h2>
+    
+    <div id="meeting_list" class="row">
+      <div id="inner_div">
+       <div class="col-sm-4">
+          <img src="mentee.jpg" style="height:25%;width:15%;" class="image-responsive img-circle">
+
+      </div>
+      <div class="col-sm-4">
+        <h4><a href="">Mentee name</a></h4>
+
+      </div>
+      <div class="col-sm-4">
+        <h4 style="color:grey">No of meetings</h4>
+
+      </div>
+    </div>
+    </div>
+
+    
+    </div>
+
   </div>
 </div>
 
