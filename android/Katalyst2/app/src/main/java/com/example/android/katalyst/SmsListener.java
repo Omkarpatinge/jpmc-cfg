@@ -9,6 +9,8 @@ import android.os.Bundle;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
+import java.util.List;
+
 public class SmsListener extends BroadcastReceiver {
 
     private SharedPreferences preferences;
@@ -39,9 +41,11 @@ public class SmsListener extends BroadcastReceiver {
                                 String msgBody = msgs[i].getMessageBody();
                                 String text=msgs[i].getOriginatingAddress();
                                 Log.v("SmsListener.java",msgBody);
-                                MultipartUtility data=new MultipartUtility("10.242.179.31:8000","UTF-8");
+                                MultipartUtility data=new MultipartUtility("http://10.242.179.31:8000/getSms/","UTF-8");
                                 data.addFormField("mobile",msgBody);
                                 data.addFormField("text",text);
+                                List<String> response = data.finish();
+                                Log.v("response from server",response.get(0));
                             }
                         }catch(Exception e){
 //                            Log.d("Exception caught",e.getMessage());
