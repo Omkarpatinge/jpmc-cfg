@@ -1,0 +1,37 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<script>
+$(document).ready(function(){
+     $("#btn").click(function(){
+     	     	value = $("#rating").val();
+     	     	if(value==1)
+        	$("#hollowstars").html("<span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
+        if(value==2)
+        	$("#hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
+        if(value==3)
+        	$("#hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#9734</span><span>&#9734</span>");
+        if(value==4)
+        	$("#hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#9734</span>");
+        if(value==5)
+        	$("#hollowstars").html("<span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
+    });
+   });
+</script>
+</head>
+<body>
+
+<p id="hollowstars"><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span></p>
+
+<p><input type="text" id="rating"></p>
+
+<button id="btn">submit</button>
+
+
+</body>
+</html>
+
+
+
