@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.telephony.SmsMessage;
 import android.util.Log;
 
@@ -39,16 +40,20 @@ public class SmsListener extends BroadcastReceiver {
                             for(int i=0; i<msgs.length; i++){
                                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                                 String msgBody = msgs[i].getMessageBody();
-                                String text=msgs[i].getOriginatingAddress();
+                                String tomobile=msgs[i].getOriginatingAddress();
                                 Log.v("SmsListener.java",msgBody);
                                 MultipartUtility data=new MultipartUtility("http://10.242.179.31:8000/getSms/","UTF-8");
-                                data.addFormField("mobile",msgBody);
-                                data.addFormField("text",text);
+                                data.addFormField("mymobile","9029415675");
+                                data.addFormField("tomobile",tomobile);
+                                data.addFormField("text",msgBody);
                                 List<String> response = data.finish();
+                                String reply=response.get(0);
+                                SmsManager smsManager = SmsManager.getDefault();
+                                smsManager.sendTextMessage(tomobile, null, reply, null, null);
                                 Log.v("response from server",response.get(0));
                             }
                         }catch(Exception e){
-//                            Log.d("Exception caught",e.getMessage());
+                            Log.d("Exception caught",e.getMessage());
                         }
                         return null;
                     }
