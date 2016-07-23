@@ -1,0 +1,7 @@
+send_mail(
+    'Subject',
+    'Message.',
+    'from@example.com',
+    ['john@example.com', 'jane@example.com'],
+)
+
