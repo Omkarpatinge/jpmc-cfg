@@ -5,16 +5,19 @@
   <title>Mentees</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="stylesheet" href="css/bootstrap.min.css">
-  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
-  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
-  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
-  <script src="js/bootstrap.min.js"></script>
+      {% load static from staticfiles %}
+
+<link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "css/sb-admin.css"%}">
+<link rel="stylesheet" type="text/css" href="{% static "css/plugins/morris.css"%}">
+    <link rel="stylesheet" type="text/css" href="{% static "font-awesome/css/font-awesome.min.css"%}">
+
   <style>
   body {
       font: 400 15px Lato, sans-serif;
       line-height: 1.8;
       color: #818181;
+      background-color: #ffffff!important;
   }
   h2 {
       font-size: 24px;
@@ -31,7 +34,7 @@
       margin-bottom: 30px;
   }
   .jumbotron {
-      background-color: #f4511e;
+      background-color: #b30000;
       color: #fff;
       padding: 50px 25px;
       font-family: Montserrat, sans-serif;
@@ -43,11 +46,11 @@
       background-color: #f6f6f6;
   }
   .logo-small {
-      color: #f4511e;
+      color: #b30000;
       font-size: 50px;
   }
   .logo {
-      color: #f4511e;
+      color: #b30000;
       font-size: 200px;
   }
   .thumbnail {
@@ -62,13 +65,13 @@
   }
   .carousel-control.right, .carousel-control.left {
       background-image: none;
-      color: #f4511e;
+      color: #b30000;
   }
   .carousel-indicators li {
-      border-color: #f4511e;
+      border-color: #b30000;
   }
   .carousel-indicators li.active {
-      background-color: #f4511e;
+      background-color: #b30000;
   }
   .item h4 {
       font-size: 19px;
@@ -81,7 +84,7 @@
       font-style: normal;
   }
   .panel {
-      border: 1px solid #f4511e;
+      border: 1px solid #b30000;
       border-radius:0 !important;
       transition: box-shadow 0.5s;
   }
@@ -96,13 +99,13 @@
       box-shadow: 5px 0px 40px rgba(0,0,0, .2);
   }
   .panel-footer .btn:hover {
-      border: 1px solid #f4511e;
+      border: 1px solid #b30000;
       background-color: #fff !important;
-      color: #f4511e;
+      color: #b30000;
   }
   .panel-heading {
       color: #fff !important;
-      background-color: #f4511e !important;
+      background-color: #b30000 !important;
       padding: 25px;
       border-bottom: 1px solid transparent;
       border-top-left-radius: 0px;
@@ -122,12 +125,12 @@
   }
   .panel-footer .btn {
       margin: 15px 0;
-      background-color: #f4511e;
+      background-color: #b30000;
       color: #fff;
   }
   .navbar {
       margin-bottom: 0;
-      background-color: #f4511e;
+      background-color: #b30000;
       z-index: 9999;
       border: 0;
       font-size: 12px !important;
@@ -140,7 +143,7 @@
       color: #fff !important;
   }
   .navbar-nav li a:hover, .navbar-nav li.active a {
-      color: #f4511e !important;
+      color: #b30000 !important;
       background-color: #fff !important;
   }
   .navbar-default .navbar-toggle {
@@ -150,7 +153,7 @@
   footer .glyphicon {
       font-size: 20px;
       margin-bottom: 20px;
-      color: #f4511e;
+      color: #b30000;
   }
   .slideanim {visibility:hidden;}
   .slide {
@@ -207,7 +210,7 @@
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
       </button>
-      <a class="navbar-brand" href="#myPage">Logo</a>
+      <a class="navbar-brand" href="#myPage">Katalyst</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
       <ul class="nav navbar-nav navbar-right">
@@ -222,7 +225,7 @@
 
 <div class="jumbotron text-center">
   <br><h3>Mentee name</h3><br>
-  <img src="mentee.jpg" style="hieght:25%;width:15%" class="image-responsive img-circle">
+  <img src="{% static 'img/mentee.jpg' %}" style="hieght:25%;width:15%" class="image-responsive img-circle">
   <br><br><h4 style="color:white">No. of meetings:5</h4>
   <h4 style="color:white"><a style="color:white" href="">Mentor name</a></h4>
   </form>
@@ -294,6 +297,14 @@ $(document).ready(function(){
   });
 })
 </script>
+
+<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+<script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/morris.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/raphael.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/morris-data.js" %}"></script>
+
+
 
 </body>
 </html>
