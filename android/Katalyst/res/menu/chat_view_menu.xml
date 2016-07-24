@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context="net.taptools.android.sportshistory.PlayerProfileActivity" >
+
+    <item
+        android:id="@+id/see_goals"
+        android:showAsAction="always"
+        android:title="Goals"
+        app:showAsAction="always"/>
+    
+    <item
+        android:id="@+id/edit"
+        android:showAsAction="always"
+        android:title="Edit"
+        app:showAsAction="always"/>
+
+</menu>

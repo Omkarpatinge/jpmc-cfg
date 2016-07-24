@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:weightSum="10" >
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Ongoing Appointment Chats"
+        android:gravity="center"
+        android:textSize="20sp" />
+
+    <ListView
+        android:layout_weight="7.5"
+        android:id="@+id/familyListView"
+        android:layout_width="match_parent"
+        android:divider="#cc000000"
+        android:dividerHeight="1dp"
+        android:layout_height="wrap_content" >
+    </ListView>
+
+    <Button
+        android:id="@+id/add_family"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1.5"
+        android:background="@color/primary_red"
+        android:text="+"
+        android:textColor="@android:color/white"
+        android:textStyle="bold"
+        android:textSize="20sp" />
+
+</LinearLayout>
