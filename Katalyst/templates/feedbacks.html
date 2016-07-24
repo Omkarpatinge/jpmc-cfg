@@ -1,17 +1,26 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <!-- Theme Made By www.w3schools.com - No Copyright -->
-  <title>Katalyst Admin</title>
+  <!-- Theme Made By www.w3schools.com -  -->
+  <title>Katalyst</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-      {% load static from staticfiles %}
+  {% load static from staticfiles %}
 
 <link rel="stylesheet" type="text/css" href="{% static "css/bootstrap.min.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "css/sb-admin.css"%}">
+<link rel="stylesheet" type="text/css" href="{% static "css/plugins/morris.css"%}">
     <link rel="stylesheet" type="text/css" href="{% static "font-awesome/css/font-awesome.min.css"%}">
-  <script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
+
+
+
+<script type="text/javascript" src="{% static "js/jquery.js" %}"></script>
 <script type="text/javascript" src="{% static "js/bootstrap.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/morris.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/raphael.min.js" %}"></script>
+<script type="text/javascript" src="{% static "js/plugins/morris/morris-data.js" %}"></script>
+  <link href="http://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet" type="text/css">
+  <link href="http://fonts.googleapis.com/css?family=Lato" rel="stylesheet" type="text/css">
 
   <style>
   body {
@@ -39,7 +48,6 @@
     text-decoration: none;
     color:grey; 
   }
-
   a:hover
   {
     text-decoration: none;
@@ -213,31 +221,13 @@
         font-size: 150px;
     }
   }
-
-  #inner_div{
-      margin: 2%;
-  }
-
+	.abc
+	{
+		border: 1px solid #b30000;
+	}
+  
   </style>
 
-
-
-  <script>
-$(document).ready(function(){
-            value = 3;
-            if(value==1)
-          $(".hollowstars").html("<span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
-        if(value==2)
-          $(".hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
-        if(value==3)
-          $(".hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#9734</span><span>&#9734</span>");
-        if(value==4)
-          $(".hollowstars").html("<span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#10029</span><span>&#9734</span>");
-        if(value==5)
-          $(".hollowstars").html("<span>&#10029</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span>");
-    });
-   
-</script>
 </head>
 <body id="myPage" data-spy="scroll" data-target=".navbar" data-offset="60">
 
@@ -252,12 +242,7 @@ $(document).ready(function(){
       <a class="navbar-brand" href="#myPage">Katalyst</a>
     </div>
     <div class="collapse navbar-collapse" id="myNavbar">
-        <!-- <ul class="nav navbar-nav">
-        <li><a href="#about">LOCATION</a></li>
-        <li><a href="#services">DETAILS</a></li>
-        <li><a href="#portfolio">FEEDBACK</a></li>
-        <li><a href="#pricing">GOALS</a></li>
-      </ul> -->
+
     </div>
   </div>
 </nav>
@@ -276,29 +261,29 @@ $(document).ready(function(){
 <!-- Container (Pricing Section) -->
 <div id="pricing" class="container-fluid bg-grey">
   <div class="text-center">
-    <h2>MENTORS</h2>
+    <h4>MOST RECENT FEEDBACKS</h4>
 
-      {% for xx in mentors %}
+      {% for xx in feedbacks %}
 
-    
-            <div id="meeting_list" class="row">
-                  <div id="inner_div">
-                       <div class="col-sm-4">
-                          <img src="{% static 'img/mentor.jpg' %}" style="height:25%;width:15%;" class="image-responsive img-circle">
-
-                      </div>
-                      <div class="col-sm-4">
-                        <h4><a href="/mentor/?id={{ xx.id }}">{{xx.first_name}} {{ xx.last_name }}</a></h4>
-
-                      </div>
-                      <div class="col-sm-4">
-                        <h4 class="hollowstars"><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span><span>&#9734</span></h4>
-
-                      </div>
-                </div>
+    <div id="meeting_list" class="row" style="margin-bottom: 20px">
+            <div id="inner_div">
+               <div class="col-sm-4 abc">
+                  <h4 style="color:grey">{{ xx.appointment.id }}</h4>
+              </div>
+              <div class="col-sm-4 abc">
+                <h4><a href="/mentee/?id={{ xx.appointment.mentee.id }}">{{ xx.appointment.mentee.first_name }} {{ xx.appointment.mentee.last_name }}</a></h4>
+              </div>
+              <div class="col-sm-4 abc">
+                <h4 style="color:grey"><a href="/mentor/?id={{ xx.appointment.mentor.id }}">{{ xx.appointment.mentor.first_name }} {{ xx.appointment.mentor.last_name }}e</a></h4>
+              </div>
             </div>
 
-
+            <div id="inner_div abc" >
+              <div class="col-sm-12">
+                <h4>{{ xx.text }}</h4>
+              </div>
+            </div>
+    </div>
 
       {% endfor %}
 
@@ -310,7 +295,5 @@ $(document).ready(function(){
 
 
 
-
 </body>
 </html>
-

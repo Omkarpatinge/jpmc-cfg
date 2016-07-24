@@ -4,7 +4,7 @@ from django.http.response import HttpResponse
 from django.shortcuts import render, redirect
 # Create your views here.
 from django.views.decorators.csrf import csrf_exempt
-from KatalystApp.models import Mentor,Mentee,Appointment, AppointmentChat, Feedback
+from KatalystApp.models import Mentor,Mentee,Appointment, AppointmentChat, Feedback, Unsent
 from gcm import GCM
 
 
@@ -88,6 +88,10 @@ def addQueryMessageMentor(request):
     aap.appointment=aa
     aap.text = request.POST['text'].strip()
     aap.save(force_insert=True)
+    try:
+        sendGCM(aap.mentee.gcm, "New Message Recieved!","You have a new message on the Katalyst Platform")
+    except:
+        pass
     return HttpResponse("cool")
 
 @csrf_exempt
@@ -98,6 +102,10 @@ def addQueryMessageMentee(request):
     aap.appointment=aa
     aap.text = request.POST['text'].strip()
     aap.save(force_insert=True)
+    try:
+        sendGCM(aap.mentor.gcm, "New Message Recieved!","You have a new message on the Katalyst Platform")
+    except:
+        pass
     return HttpResponse("cool")
 
 
@@ -190,7 +198,89 @@ def analytics(request):
 @csrf_exempt
 def analytic(request):
     return render(request,'analytics.html',{})
-# @csrf_exempt
-# def getFeedback(request):
-#
+
+@csrf_exempt
+def getFeedback(request):
+    text = request.POST['text'].strip()
+    rating = int(request.POST['rating'].strip())
+    mobile = request.POST['mobile'].strip()
+    forwhom = int(request.POST['forwhom'].strip())
+    f = Feedback()
+    f.appointment = Appointment.objects.get(id=forwhom)
+    f.text = text
+    f.rating = rating
+    f.save(force_insert=True)
+    try:
+        sendGCM(f.appointment.mentor.gcm, "New Feedback Recieved!","You have a new feedback on the Katalyst Platform")
+    except:
+        pass
+    return HttpResponse("Cool")
+
+@csrf_exempt
+def createAppt(request):
+    mentee = Mentee.objects.get(mobile = request.POST['mobile'].strip())
+    location = request.POST['location'].strip()
+    date = request.POST['date'].strip()
+    time = request.POST['time'].strip()
+    app = Appointment()
+    app.location = location
+    app.datetime = date+" "+time
+    app.mentee = mentee
+    app.mentor = mentee.assigned_mentor
+    try:
+        sendGCM(app.mentee.gcm,"New Appointment!!","New Appointmnet fixed by You!!")
+        sendGCM(app.mentor.gcm,"New Appointment!!","New Appointmnet fixed by Mentee!!")
+    except:
+        pass
+    app.save(force_insert=True)
+    return HttpResponse("Cool")
+
+@csrf_exempt
+def feedbacks(request):
+    context = {}
+    context['feedbacks']=Feedback.objects.all()
+    return render(request,'feedbacks.html',context)
+
+@csrf_exempt
+def meetings(request):
+    context = {}
+    context['meetings']=Appointment.objects.all()
+    return render(request,'meetings.html',context)
+
+@csrf_exempt
+def allPairings(request):
+    context = {}
+    context['mentees'] = Mentee.objects.all()
+    return render(request,'suggestions.html',context)
+
+
+@csrf_exempt
+def addQueryMessage(request):
+    mobile = request.POST['mobile'].strip()
+    text = request.POST['text'].strip()
+    mentee = Mentee.objects.get(mobile = mobile)
+    lis =[]
+    for xx in Appointment.objects.all():
+        if xx.mentee.pk == mentee.pk:
+            lis.append(xx)
+    app = lis[-1]
+    try:
+        sendGCM(app.mentor.gcm, "New Message Recieved!","You have a new message on the Katalyst Platform")
+    except:
+        pass
+    aap = AppointmentChat()
+    aap.sender = 2
+    aap.appointment=app
+    aap.text = text
+    aap.save(force_insert=True)
+    return HttpResponse("Cool")
+
+
+@csrf_exempt
+def anyMessage(request):
+    for xx in Unsent.objects.all():
+        str = xx.mobile+"~"+xx.msg
+        xx.delete()
+        return HttpResponse(str)
+    return HttpResponse("Oops")
 

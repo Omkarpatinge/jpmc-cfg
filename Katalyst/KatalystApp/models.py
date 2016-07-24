@@ -69,7 +69,7 @@ class Appointment(models.Model):
     location = models.CharField(max_length=512,default=None, null=True, blank=True)
     mentor = models.ForeignKey(Mentor)
     mentee = models.ForeignKey(Mentee)
-    datetime = models.DateTimeField()
+    datetime = models.CharField(max_length=512,default=None, null=True, blank=True)
     goals = models.ManyToManyField(Goals)
 
     def __unicode__(self):
@@ -97,8 +97,15 @@ class AppointmentChat(models.Model):
 class Reminders(models.Model):
     mentor = models.ForeignKey(Mentor)
     mentee = models.ForeignKey(Mentee)
-    datetime = models.DateTimeField()
+    datetime = models.CharField(max_length=512,default=None, null=True, blank=True)
     for_appointment = models.ForeignKey(Appointment)
 
     def __unicode__(self):
         return "Reminder for " + self.mentor.first_name + " and " + self.mentee.first_name + "'s appointment"
+
+class Unsent(models.Model):
+    mobile = models.CharField(max_length=512)
+    msg = models.CharField(max_length=150)
+
+    def __unicode__(self):
+        return "Unsent Message #"+str(self.id)

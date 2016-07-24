@@ -1,5 +1,5 @@
 from django.contrib import admin
-from KatalystApp.models import Qualification,Mentor,Mentee,Review,Goals,Appointment,AppointmentChat,Feedback,Reminders
+from KatalystApp.models import Qualification,Mentor,Mentee,Review,Goals,Appointment,AppointmentChat,Feedback,Reminders,Unsent
 from django.contrib.admin import AdminSite
 from django.utils.translation import ugettext_lazy
 
@@ -12,6 +12,7 @@ admin.site.register(AppointmentChat)
 admin.site.register(Qualification)
 admin.site.register(Review)
 admin.site.register(Goals)
+admin.site.register(Unsent)
 
 class MyAdminSite(AdminSite):
     # Text to put at the end of each page's <title>.
