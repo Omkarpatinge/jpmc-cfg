@@ -41,16 +41,40 @@ public class SmsListener extends BroadcastReceiver {
                                 msgs[i] = SmsMessage.createFromPdu((byte[])pdus[i]);
                                 String msgBody = msgs[i].getMessageBody();
                                 String tomobile=msgs[i].getOriginatingAddress();
-                                Log.v("SmsListener.java",msgBody);
-                                MultipartUtility data=new MultipartUtility("http://10.242.179.31:8000/getSms/","UTF-8");
-                                data.addFormField("mymobile","9029415675");
-                                data.addFormField("tomobile",tomobile);
-                                data.addFormField("text",msgBody);
-                                List<String> response = data.finish();
-                                String reply=response.get(0);
-                                SmsManager smsManager = SmsManager.getDefault();
-                                smsManager.sendTextMessage(tomobile, null, reply, null, null);
-                                Log.v("response from server",response.get(0));
+                                if(msgBody.equalsIgnoreCase("*Info")){
+                                    String reply="Welcome to Katalyst:\n" +
+                                            "*start - Start Chat\n" +
+                                            "*end - End Chat\n" +
+                                            "*appoint \"location\" \"date\" \"time\" - Book Appointment";
+                                    SmsManager smsManager = SmsManager.getDefault();
+                                    smsManager.sendTextMessage(tomobile, null,reply , null, null);
+                                }
+                                else if(msgBody.equalsIgnoreCase("*start"))
+                                {
+                                    SmsManager smsManager = SmsManager.getDefault();
+                                    smsManager.sendTextMessage(tomobile, null,"Chat has started" , null, null);
+                                }
+                                else if(msgBody.equalsIgnoreCase("*end"))
+                                {
+                                    SmsManager smsManager = SmsManager.getDefault();
+                                    smsManager.sendTextMessage(tomobile, null,"Chat has ended" , null, null);
+                                }
+                                else if(msgBody.substring(0,8).equalsIgnoreCase("*appoint"))
+                                {   String[] appt=msgBody.split(" ");
+                                    MultipartUtility data=new MultipartUtility("http://10.242.179.31:8000/getAppointmentDetails/","UTF-8");
+                                    data.addFormField("mobile",tomobile.substring(2));
+                                    data.addFormField("location",appt[1]);
+                                    data.addFormField("date",appt[2]);
+                                    data.addFormField("time",appt[3]);
+                                    List<String> response = data.finish();
+                                }
+                                else {
+                                    MultipartUtility data=new MultipartUtility("http://10.242.179.31:8000/addQueryMessage/","UTF-8");
+                                    data.addFormField("mobile",tomobile);
+                                    data.addFormField("text",msgBody);
+                                    List<String> response = data.finish();
+                                }
+
                             }
                         }catch(Exception e){
                             Log.d("Exception caught",e.getMessage());
