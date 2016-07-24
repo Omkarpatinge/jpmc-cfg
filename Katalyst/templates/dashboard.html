@@ -159,7 +159,7 @@
                             <div class="panel-body">
                                 <div class="list-group">
                                     {% for xx in appointments %}
-                                    <a href="/appointment/?id={{ xx.id }}" class="list-group-item">
+                                    <a href="/meeting/?id={{ xx.id }}" class="list-group-item">
                                         <i class="fa fa-fw fa-calendar"></i>Meeting bw: {{ xx.mentor.first_name }} and {{ xx.mentee.first_name }}
                                     </a>
                                     {% endfor %}
