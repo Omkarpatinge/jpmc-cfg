@@ -81,6 +81,7 @@ public class ChatViewFragment extends Fragment {
 					mp.addFormField("id", id+"");
 					List<String> ls = mp.finish();
 					String ss = ls.get(0);
+					Log.e("SS",ss);
 					for(String s : ss.split("~")){
 						String msg = s.split(",")[0];
 						int num = Integer.parseInt(s.split(",")[1]);

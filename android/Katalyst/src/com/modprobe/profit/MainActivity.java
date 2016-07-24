@@ -35,8 +35,8 @@ public class MainActivity extends ActionBarActivity {
 		AppController app = AppController.getInstance();
 		Editor edit = app.prefs.edit();
 		edit.putBoolean("mentor", false);
-//		edit.putString("mobile","9930113199");
-		edit.putString("mobile","9820745134");
+		edit.putString("mobile","9029415675");
+//		edit.putString("mobile","9322503511");
 		edit.commit();
 //		if(app.prefs.getBoolean("first",true)){
 //			//Take to edit screen
